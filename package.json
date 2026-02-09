@@ -13,7 +13,8 @@
     "aws-amplify": "^6.6.6",
     "next": "14.2.10",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "three": "^0.165.0"
   },
   "devDependencies": {
     "@aws-amplify/backend": "^1.5.1",
@@ -21,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/three": "^0.182.0",
     "aws-cdk": "^2",
     "aws-cdk-lib": "^2",
     "constructs": "^10.3.0",

@@ -1,4 +1,5 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { distance } from "three/tsl";
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -6,10 +7,54 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
+const trackEnum = a.enum(["TURF", "DIRT", "JUMP"]);
+const distanceEnum = a.enum([
+  "1000",
+  "1200",
+  "1400",
+  "1600",
+  "1800",
+  "2000",
+  "2200",
+  "2400",
+  "2500",
+  "3000",
+  "3200",
+]);
+
 const schema = a.schema({
   Todo: a
     .model({
-      content: a.string(),
+      content: a
+        .string()
+        .validate((v) =>
+          v
+            .minLength(1, "Content must be at least 1 character long")
+            .maxLength(100, "Content must be less than 100 characters")
+            .matches(
+              "^[a-zA-Z0-9\\\\s]+$",
+              "Content must contain only letters, numbers, and spaces",
+            ),
+        )
+        .required(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+
+  Race: a
+    .model({
+      id: a.string().required(),
+      name: a
+        .string()
+        .validate((v) =>
+          v
+            .minLength(1, "レース名を入力してください")
+            .maxLength(100, "レース名は100文字以内で入力してください"),
+        )
+        .required(),
+      track: trackEnum,
+      distance: distanceEnum,
+      location: a.string(),
+      description: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });

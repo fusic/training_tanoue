@@ -1,0 +1,28 @@
+{
+  "name": "netkeiba-scraper",
+  "version": "1.0.0",
+  "description": "JRA重賞レース情報スクレイピングツール",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "scrape": "ts-node src/index.ts",
+    "scrape:full": "ts-node src/index-with-history.ts",
+    "dev": "ts-node src/index.ts"
+  },
+  "keywords": [
+    "scraping",
+    "netkeiba",
+    "horse-racing"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "puppeteer": "^24.37.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

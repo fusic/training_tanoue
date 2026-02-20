@@ -7,20 +7,6 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
-const trackEnum = a.enum(["TURF", "DIRT", "JUMP"]);
-const distanceEnum = a.enum([
-  "1000",
-  "1200",
-  "1400",
-  "1600",
-  "1800",
-  "2000",
-  "2200",
-  "2400",
-  "2500",
-  "3000",
-  "3200",
-]);
 
 const schema = a.schema({
   Todo: a
@@ -39,22 +25,9 @@ const schema = a.schema({
         .required(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
-
   Race: a
     .model({
-      id: a.string().required(),
-      name: a
-        .string()
-        .validate((v) =>
-          v
-            .minLength(1, "レース名を入力してください")
-            .maxLength(100, "レース名は100文字以内で入力してください"),
-        )
-        .required(),
-      track: trackEnum,
-      distance: distanceEnum,
-      location: a.string(),
-      description: a.string(),
+      name: a.string().required(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
